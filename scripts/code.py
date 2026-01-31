@@ -1,12 +1,13 @@
 import random
 file=open("scripts/holder.gitkeep","r")
+fileW=open("scripts/mutated_p53.fasta","w")
+
 def Mutate_DNA(seq):
     mut=""
-    p=0
     for j in range (3):
-     place = random.randint(p,len(seq)-1)
+     place = random.randint(0,len(seq)-1)
      nuc=random.randint(1,4)
-     for i in range (len(seq)):
+     for i in range (len(seq)-1):
       if seq[i,i+2]=="UAA" or seq[i,i+2]=="UAG" or seq[i,i+2]=="UGA":
          break
       if i==place and nuc !=seq[i]:
@@ -20,5 +21,18 @@ def Mutate_DNA(seq):
             mut+="G"
       else:
        mut+=seq[i] 
-      p=i
     return mut   
+
+seq=""
+for line in file:
+   seq+=line
+
+
+fileW.write("the original:")
+fileW.write(seq)
+fileW.write("the muted:")
+fileW.write(Mutate_DNA(seq))
+if len(Mutate_DNA(seq))<seq:
+   fileW.write("got smaller")
+elif len(Mutate_DNA(seq))==seq:
+   fileW.write("stayd same length")
