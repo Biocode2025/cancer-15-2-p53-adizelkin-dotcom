@@ -7,6 +7,8 @@ def Mutate_DNA(seq):
      place = random.randint(p,len(seq)-1)
      nuc=random.randint(1,4)
      for i in range (len(seq)):
+      if seq[i,i+2]=="UAA" or seq[i,i+2]=="UAG" or seq[i,i+2]=="UGA":
+         break
       if i==place and nuc !=seq[i]:
         if nuc == 1:
             mut+="A"
